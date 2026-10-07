@@ -26,7 +26,8 @@ Título y «*Acceso a Datos · 2.º DAM · Versión del dd/mm/aaaa*» (actualiza
 - Listados numerados: `**Listado N.x.** Descripción` antes del bloque de código.
 - Figuras: `![texto alternativo descriptivo](img/fig-N-x-nombre.svg)` y debajo `*Figura N.x. Pie.*`. Numeración por orden de aparición; si se insertan figuras o listados, renumera y corrige las referencias.
 - Recuadros: `> **Desde C++.** …`. Ejercicios en `### Para practicar`, con (A) para los autónomos.
-- Sin `<` ni `>` sueltos fuera del código en el texto o en los textos alternativos (kramdown los toma por HTML), y sin `{{` ni `{%` fuera de bloques `{% raw %}` (Liquid).
+- Sin `<` ni `>` sueltos fuera del código en el texto o en los textos alternativos (kramdown los toma por HTML).
+- Sin dobles llaves de apertura ni una llave seguida de un signo de porcentaje en ningún Markdown, tampoco dentro de bloques de código: Jekyll las interpreta como Liquid y la publicación falla. Si un ejemplo las necesita, envuélvelo en un bloque `raw` de Liquid. Esta regla vale también para este fichero y para el README.
 - Tablas sin `|` dentro de las celdas.
 
 ## Figuras
@@ -36,6 +37,10 @@ Se generan con `herramientas/figuras/`. Usa `lib.py` (misma paleta y funciones) 
 ## Código
 
 Todo el código de los apuntes debe compilar y ejecutarse con JDK 25, y las salidas que se muestran deben ser reales. El código de los ejemplos vive en `docs/udN/ejemplos/`; los listados del Markdown deben coincidir con esos ficheros. Para comprobarlo: `gradle wrapper` (una vez) y `./gradlew build` en la carpeta del ejemplo.
+
+## Publicación
+
+GitHub Pages publica desde la rama `main` y la carpeta **`/docs`** (Settings → Pages). Si se elige la raíz, Jekyll procesa también este fichero y el README, y la web no es la de los apuntes. Cada *push* lanza la tarea «pages build and deployment» en la pestaña Actions: si falla, el error aparece en el paso *build*.
 
 ## Git
 

@@ -1,0 +1,29 @@
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.idea/
+*.iml
+.vscode/
+
+# Java y Gradle (también dentro de los ejemplos)
+.gradle/
+build/
+bin/
+out/
+*.class
+
+# Ficheros que generan los ejemplos al ejecutarse
+docs/**/ejemplos/**/datos/
+docs/**/ejemplos/**/export/
+
+# Jekyll (si se previsualiza la web en local)
+_site/
+.jekyll-cache/
+.sass-cache/
+
+# Herramientas de figuras
+__pycache__/
+herramientas/figuras/previas/
