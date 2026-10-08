@@ -1,0 +1,287 @@
+/*
+ * Navegación de las unidades (Acceso a Datos · 2.º DAM)
+ * Complementa al tema Just the Docs v0.9.0; el comportamiento está en assets/js/indice-lateral.js.
+ *
+ * Pantallas anchas (desde 75rem = 1200 px): menú del sitio a la izquierda, texto en el centro
+ * e índice "En esta unidad" fijo a la derecha.
+ *   menú 16.5rem + texto 50rem + hueco 1.5rem + índice 15rem + margen 1rem = 84rem
+ * Si sobra anchura, se reparte a los dos lados; si falta, se estrecha el texto.
+ * Pantallas estrechas: botón flotante "Índice" que abre el mismo índice como panel.
+ */
+
+h2[id],
+h3[id] {
+  scroll-margin-top: 1rem;
+}
+
+/* Título del sitio en el menú lateral: más pequeño para que no se salga de la cabecera */
+@media (min-width: 50rem) {
+  .site-title {
+    padding-right: 1rem;
+    font-size: 1rem !important;
+    font-weight: 500;
+    line-height: 1.25;
+  }
+}
+
+/* ---------- Índice: estilos comunes ---------- */
+
+.indice-lateral {
+  display: none;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+}
+
+.indice-cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.indice-titulo {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #27262b;
+}
+
+.indice-cerrar {
+  display: none;
+  padding: 0 0.5rem;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #5c5962;
+  cursor: pointer;
+  background: none;
+  border: 0;
+}
+
+.indice-lateral ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.indice-lateral li {
+  margin: 0;
+  padding: 0;
+}
+
+.indice-lateral li::before {
+  content: none !important;
+}
+
+.indice-lista a {
+  display: block;
+  padding: 0.3rem 0.5rem 0.3rem 0.75rem;
+  color: #5c5962;
+  text-decoration: none;
+  border-left: 2px solid #eeebee;
+  background-image: none;
+}
+
+.indice-lista ol a {
+  padding-left: 1.5rem;
+  font-size: 0.78rem;
+}
+
+.indice-lista a:hover {
+  color: #7253ed;
+  border-left-color: #c5b8f8;
+}
+
+.indice-lista a[aria-current] {
+  color: #7253ed;
+  font-weight: 600;
+  border-left-color: #7253ed;
+  background-color: #f5f3ff;
+}
+
+/* Los subapartados solo se despliegan en el apartado que se está leyendo */
+.indice-lista li > ol {
+  display: none;
+}
+
+.indice-lista li.abierto > ol {
+  display: block;
+}
+
+.indice-lista li.abierto > a:not([aria-current]) {
+  color: #27262b;
+  font-weight: 600;
+}
+
+.indice-arriba {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding-left: 0.75rem;
+  font-size: 0.75rem;
+  color: #959396;
+  text-decoration: none;
+}
+
+.indice-arriba:hover {
+  color: #7253ed;
+}
+
+.indice-boton,
+.indice-fondo {
+  display: none;
+}
+
+/* Mientras se usa el buscador, el índice no debe quedar por encima de los resultados */
+.search-active .indice-lateral,
+.search-active .indice-boton {
+  visibility: hidden;
+}
+
+/* ---------- Pantallas anchas: tres columnas ---------- */
+
+@media (min-width: 75rem) {
+  body:has(#markdown-toc) .side-bar {
+    width: calc(max(0px, (100% - 84rem) / 2) + 16.5rem);
+  }
+
+  body:has(#markdown-toc) .side-bar + .main {
+    margin-left: calc(max(0px, (100% - 84rem) / 2) + 16.5rem);
+    max-width: min(50rem, calc(100% - 34rem));
+  }
+
+  /* El índice de la cabecera sobra: el lateral lo sustituye */
+  #main-content details:has(> #markdown-toc) {
+    display: none;
+  }
+
+  .indice-lateral {
+    display: block;
+    position: fixed;
+    z-index: 0;
+    top: 5.25rem;
+    right: calc(max(0px, (100% - 84rem) / 2) + 1rem);
+    width: 15rem;
+    max-height: calc(100vh - 6.5rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+}
+
+/* ---------- Pantallas estrechas: botón y panel desplegable ---------- */
+
+@media (max-width: 74.99rem) {
+  .indice-boton {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    position: fixed;
+    z-index: 20;
+    right: 1rem;
+    bottom: 1rem;
+    padding: 0.55rem 0.9rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #fff;
+    cursor: pointer;
+    background-color: #7253ed;
+    border: 0;
+    border-radius: 999px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .indice-abierto .indice-boton {
+    display: none;
+  }
+
+  .indice-abierto .indice-fondo {
+    display: block;
+    position: fixed;
+    z-index: 21;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  .indice-abierto .indice-lateral {
+    display: block;
+    position: fixed;
+    z-index: 22;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(20rem, 88vw);
+    padding: 1rem 0.75rem 1.5rem 1rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background-color: #fff;
+    box-shadow: -2px 0 12px rgba(0, 0, 0, 0.15);
+    font-size: 0.875rem;
+  }
+
+  .indice-abierto .indice-cerrar {
+    display: block;
+  }
+
+  .indice-abierto {
+    overflow: hidden;
+  }
+}
+
+/* ---------- Unidad anterior y siguiente ---------- */
+
+.unidades-vecinas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.unidad-vecina {
+  flex: 1 1 14rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  border: 1px solid #eeebee;
+  border-radius: 6px;
+  background-image: none;
+}
+
+.unidad-vecina:hover {
+  border-color: #7253ed;
+}
+
+.unidad-vecina.siguiente {
+  text-align: right;
+}
+
+.unidad-vecina:only-child {
+  flex: 0 1 max(14rem, calc(50% - 0.5rem));
+}
+
+.unidad-vecina.siguiente:only-child {
+  margin-left: auto;
+}
+
+.unidad-vecina-etiqueta {
+  font-size: 0.75rem;
+  color: #959396;
+}
+
+.unidad-vecina-titulo {
+  font-weight: 600;
+  color: #7253ed;
+}
+
+/* ---------- Impresión ---------- */
+
+@media print {
+  .indice-lateral,
+  .indice-boton,
+  .indice-fondo,
+  .unidades-vecinas {
+    display: none !important;
+  }
+}

@@ -5,9 +5,11 @@ Apuntes, ejemplos y prácticas del módulo Acceso a Datos (CFGS Desarrollo de Ap
 ## Estructura
 
 ```text
-acceso-a-datos-dam/
+ad-dam/
 ├── docs/                    la web
 │   ├── _config.yml          configuración de Jekyll y del tema
+│   ├── _includes/           añadidos al tema: índice lateral, buscador y pie en español
+│   ├── assets/              CSS y JavaScript del índice lateral y de la unidad anterior/siguiente
 │   ├── index.md             portada del módulo
 │   ├── ud0/                 una carpeta por unidad: index.md, img/ y ejemplos/
 │   ├── ud1/
@@ -19,21 +21,21 @@ acceso-a-datos-dam/
 
 ## Primera publicación
 
-1. En GitHub, crea un repositorio **vacío** (sin README ni licencia) llamado, por ejemplo, `acceso-a-datos-dam`. Para publicar con Pages desde una cuenta gratuita, el repositorio debe ser público.
+1. En GitHub, crea un repositorio **vacío** (sin README ni licencia) llamado, por ejemplo, `ad-dam`. Para publicar con Pages desde una cuenta gratuita, el repositorio debe ser público.
 2. Desde la carpeta del proyecto (igual en PowerShell, bash y zsh; sustituye `USUARIO`):
 
    ```bash
    git init -b main
    git add .
    git commit -m "Publica la portada, la UD0 y la UD1"
-   git remote add origin https://github.com/USUARIO/acceso-a-datos-dam.git
+   git remote add origin https://github.com/USUARIO/ad-dam.git
    git push -u origin main
    ```
 
    Si es la primera vez que usas Git en este ordenador, antes: `git config --global user.name "Tu nombre"` y `git config --global user.email "tu@correo"`.
 
 3. En GitHub, en **Settings → Pages**, elige **Deploy from a branch**, la rama `main` y la carpeta `/docs`, y guarda.
-4. En uno o dos minutos la web estará en `https://USUARIO.github.io/acceso-a-datos-dam/`. El progreso de cada publicación se ve en la pestaña **Actions**.
+4. En uno o dos minutos la web estará en `https://USUARIO.github.io/ad-dam/`. El progreso de cada publicación se ve en la pestaña **Actions**.
 
 ## Trabajo diario
 

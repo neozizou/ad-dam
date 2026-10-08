@@ -7,6 +7,7 @@ Este repositorio contiene los apuntes del módulo Acceso a Datos que imparte Jai
 - `docs/`: la web. `index.md` es la portada; cada unidad está en `docs/udN/index.md`, con sus figuras en `img/` y su código en `ejemplos/`.
 - `docs/_config.yml`: Jekyll con el tema Just the Docs (`remote_theme`). Cada página de unidad lleva *front matter* con `title` y `nav_order`, y un índice `{:toc}` tras la línea de versión.
 - `herramientas/figuras/`: los generadores Python de las figuras SVG (ver su README).
+- Navegación de la web (añadida al tema sin tocarlo): `docs/_includes/head_custom.html` carga `docs/assets/css/indice-lateral.css` y `docs/assets/js/indice-lateral.js`. En las páginas con índice `{:toc}`, el script crea el índice «En esta unidad» (h2 y h3, con el apartado actual resaltado), que se ve fijo a la derecha desde 1200 px y como panel con el botón «Índice» en pantallas más estrechas; en todas las páginas del menú añade al final los enlaces a la unidad anterior y a la siguiente, tomados del menú lateral, así que basta con que cada unidad tenga su `nav_order`. `search_placeholder_custom.html` y `nav_footer_custom.html` traducen el buscador y el pie del menú. Los `_includes/*.html` sí llevan Liquid: la regla de las llaves es para los Markdown.
 
 ## Decisiones del módulo (no cambiarlas sin consultarlo)
 

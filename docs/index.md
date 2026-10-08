@@ -50,3 +50,4 @@ Necesitas instalar el JDK 25, VS Code con las extensiones de Java y Gradle. La U
 - **Desde C++**: comparación directa con lo que ya conoces de 1.º.
 - **Figura N.x**: esquemas y diagramas de lo que el código no deja ver.
 - **Para practicar**: ejercicios al final de cada apartado; los marcados con (A) son autónomos.
+- **Navegación**: en pantallas anchas, el índice «En esta unidad» de la derecha marca el apartado que estás leyendo; en el móvil o la tableta, ábrelo con el botón **Índice** de la esquina inferior. Al final de cada unidad tienes enlaces a la anterior y a la siguiente.
