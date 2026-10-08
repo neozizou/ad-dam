@@ -10,7 +10,8 @@ acceso-a-datos-dam/
 │   ├── _config.yml          configuración de Jekyll y del tema
 │   ├── index.md             portada del módulo
 │   ├── ud0/                 una carpeta por unidad: index.md, img/ y ejemplos/
-│   └── ud1/
+│   ├── ud1/
+│   └── ud2/
 ├── herramientas/figuras/    generadores de las figuras SVG
 ├── CLAUDE.md                contexto y normas del proyecto para Claude Code
 └── README.md

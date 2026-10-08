@@ -20,7 +20,7 @@ Todo el curso gira en torno a un **proyecto integrador** que construyes tú, sob
 |---|---|---|---|
 | [UD0 · Java para quien ya programa en C++](ud0/) | 8 | 16/09 – 29/09 | Nivelación |
 | [UD1 · Ficheros](ud1/) | 12 | 30/09 – 20/10 | RA1, RA6 |
-| UD2 · Bases de datos relacionales con JDBC | 14 | 21/10 – 12/11 | RA2, RA6 |
+| [UD2 · Bases de datos relacionales con JDBC](ud2/) | 14 | 21/10 – 12/11 | RA2, RA6 |
 | UD3 · Mapeo objeto-relacional con Hibernate y JPA | 12 | 12/11 – 03/12 | RA3, RA6 |
 | UD4 · Bases de datos objeto-relacionales y orientadas a objetos | 6 | 03/12 – 16/12 | RA4, RA6 |
 | Prueba de la primera evaluación | 3 | 17/12 y 22/12 | |

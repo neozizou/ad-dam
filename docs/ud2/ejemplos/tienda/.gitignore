@@ -1,0 +1,7 @@
+.gradle/
+build/
+bin/
+# Datos locales y credenciales: no se suben al repositorio
+datos/
+export/
+config.properties

@@ -29,3 +29,8 @@ defaults:
     values:
       nav_exclude: true
       search_exclude: true
+  - scope:
+      path: "ud2/ejemplos"
+    values:
+      nav_exclude: true
+      search_exclude: true

@@ -14,7 +14,8 @@ Este repositorio contiene los apuntes del módulo Acceso a Datos que imparte Jai
 - Unidades: UD0 Java desde C++ (8 h), UD1 Ficheros (12 h), UD2 JDBC (14 h), UD3 Hibernate/JPA (12 h), UD4 BD objeto-relacionales y orientadas a objetos (6 h), UD5 MongoDB (10 h), UD6 Componentes con Spring Boot (10 h). El RA6 es transversal: su criterio c se trabaja en la UD1, d en la UD2, e en la UD3, f en la UD4, g en la UD5 y a, b, h, i en la UD6.
 - Alumnado que viene de C++ (Programación de 1.º). Recuadros «Desde C++» cuando ayuden.
 - Java 25 (Temurin), Gradle 9 con Kotlin DSL, wrapper, catálogo de versiones y toolchain; VS Code. Nada de Maven ni de interfaces gráficas: consola hasta la UD5 y API REST en la UD6.
-- Versiones verificadas: JUnit 6.1.1, Jackson 3.2.1 (`tools.jackson.core`), Spring Boot 4.1, Hibernate 7 con `jakarta.persistence`.
+- Versiones verificadas: JUnit 6.1.1, Jackson 3.2.1 (`tools.jackson.core`), MariaDB Connector/J 3.5.10, H2 2.5.252, HikariCP 7.1.0, SLF4J 2.0.20, Spring Boot 4.1, Hibernate 7 con `jakarta.persistence`. MariaDB: series LTS 11.8 y 12.3.
+- Bases de datos (desde la UD2): H2 en modo MariaDB (`MODE=MariaDB;DATABASE_TO_LOWER=TRUE`) para las pruebas y como base de datos por defecto; MariaDB como servidor. El mismo SQL debe funcionar en los dos. Pool HikariCP; los repositorios reciben un `DataSource`. Credenciales en `config.properties` (no se sube; se sube `config.ejemplo.properties`) y la clave en la variable de entorno `TIENDA_DB_CLAVE`. Scripts SQL en `src/main/resources/sql`.
 - Toda orden de terminal en dos versiones: PowerShell (Windows) y bash/zsh (macOS y Linux).
 - Proyecto integrador: el ejemplo de los apuntes es una tienda (Producto, Categoria, Cliente, Pedido, LineaPedido, EstadoPedido); el alumnado elige otro dominio. La interfaz `ProductoRepository` recibe una implementación nueva en cada unidad (Memoria, Fichero, Jdbc, Jpa, ObjectDb, Mongo) y solo `App` conoce la implementación concreta.
 - Referencia: los apuntes de datos.codeandcoke.com (Santiago Faci). Si están desfasados, se usan versiones actuales y se explica en la «Nota de actualización» de la bibliografía de cada unidad.
@@ -42,13 +43,22 @@ Todo el código de los apuntes debe compilar y ejecutarse con JDK 25, y las sali
 
 GitHub Pages publica desde la rama `main` y la carpeta **`/docs`** (Settings → Pages). Si se elige la raíz, Jekyll procesa también este fichero y el README, y la web no es la de los apuntes. Cada *push* lanza la tarea «pages build and deployment» en la pestaña Actions: si falla, el error aparece en el paso *build*.
 
+## Entrega de cada unidad
+
+Al terminar una unidad, se entrega el proyecto completo en un único zip (todo el contenido del repositorio, sin la carpeta `.git`), para que Jaime lo descomprima sobre su carpeta local y lo sobrescriba todo. Si un fichero se renombra o se elimina, hay que avisarlo, porque descomprimir encima no borra los ficheros antiguos.
+
 ## Git
 
 Mensajes de *commit* en español, en imperativo y concretos («UD1: corrige la figura 1.4», «Añade la UD2»). Haz *commit* y *push* solo cuando Jaime lo pida o lo confirme.
 
+## Estado del ejemplo de la tienda
+
+Cada unidad publica su estado en `docs/udN/ejemplos/tienda`. UD0: repositorio en memoria. UD1: `ProductoRepositoryFichero` con formatos CSV, JSON, XML y binario. UD2: `BaseDatos` (HikariCP), `EjecutorScripts`, `ProductoRepositoryJdbc`, `PedidoRepository` y `PedidoRepositoryJdbc` (transacción al guardar un pedido), `PedidoService`, `MenuPrincipal` y `MenuPedidos`; el `Pedido` guarda el identificador del cliente, no un objeto `Cliente` (la UD3 lo convertirá en referencia). Los programas cortos de la UD2 están en `docs/ud2/ejemplos/demos`.
+
 ## Pendiente
 
-- Verificar con Jackson real el formato JSON de la UD1 (`docs/ud1/ejemplos/tienda`: `gradle wrapper` y `./gradlew test`); en el entorno donde se escribió no había acceso a Maven Central.
+- Verificar con Gradle en un equipo real los ejemplos de la UD1 y la UD2 (`gradle wrapper` y `./gradlew build` en cada carpeta de ejemplos): en el entorno donde se escribieron no había acceso a Maven Central. El código JDBC se probó con MariaDB 10.11, Connector/J 2.7.6, H2 2.2.220 y HikariCP 2.7.9; el formato JSON de la UD1 no se ha podido ejecutar con Jackson 3.
+- Confirmar el nombre del servidor MariaDB del aula (máquina e2-micro de Google Cloud) y cómo se crean los usuarios y las bases de datos del alumnado: la UD2 lo menciona sin dar datos.
 - Decidir si se suben los wrappers de Gradle de los ejemplos.
-- Siguiente unidad: UD2 · JDBC (RA2 y RA6.d): conectores, H2 embebido frente a MariaDB (máquina e2-micro de Google Cloud), DataSource y credenciales en `config.properties`, del diagrama de clases al modelo relacional (con DER), PreparedStatement e inyección SQL, claves generadas, lotes, transacciones, procedimientos almacenados y `ProductoRepositoryJdbc`.
+- Siguiente unidad: UD3 · Hibernate/JPA (RA3 y RA6.e): `persistence.xml`, mapeo de entidades, relaciones y el problema N+1, ciclo de vida (`persist`, `merge`, `remove`, `find`), JPQL/HQL y SQL nativo, transacciones y bloqueo optimista con `@Version`, y `ProductoRepositoryJpa` con el mismo contrato.
 - Formato de las transparencias: por decidir.
