@@ -1,20 +1,6 @@
----
-title: "UD0 · Java para quien ya programa en C++"
-nav_order: 2
----
-
 # Unidad Didáctica 0 · Java para quien ya programa en C++
-{: .no_toc }
 
 *Acceso a Datos · 2.º DAM · Versión del 01/10/2026*
-
-<details open markdown="block">
-  <summary>Contenido de la unidad</summary>
-  {: .text-delta }
-1. TOC
-{:toc}
-</details>
-
 
 ## Presentación de la unidad
 

@@ -1,13 +1,15 @@
 # Materiales de Acceso a Datos · 2.º DAM (curso 2026-2027)
 
-Este repositorio contiene los apuntes del módulo Acceso a Datos que imparte Jaime en 2.º del CFGS Desarrollo de Aplicaciones Multiplataforma, en Granada. Se publican con GitHub Pages desde la carpeta `docs/`. Responde y escribe siempre en español.
+Este repositorio contiene los apuntes del módulo Acceso a Datos que imparte Jaime en 2.º del CFGS Desarrollo de Aplicaciones Multiplataforma, en Granada. Se publican en https://neozizou.github.io/ad-dam/ con MkDocs y el tema Material, igual que los del módulo de Python (repositorio python-ia-dam). Responde y escribe siempre en español.
 
 ## Estructura
 
-- `docs/`: la web. `index.md` es la portada; cada unidad está en `docs/udN/index.md`, con sus figuras en `img/` y su código en `ejemplos/`.
-- `docs/_config.yml`: Jekyll con el tema Just the Docs (`remote_theme`). Cada página de unidad lleva *front matter* con `title` y `nav_order`, y un índice `{:toc}` tras la línea de versión.
+- `docs/`: la web. `index.md` es la portada; cada unidad está en `docs/udN/index.md`, con sus figuras en `img/` y su código en `ejemplos/`. Las carpetas `ejemplos/` no se publican en la web (`exclude_docs`): se consultan y descargan desde GitHub.
+- `mkdocs.yml`: configuración de la web. El menú (`nav`) se escribe a mano: al añadir una unidad, añade su línea y enlázala en la tabla de la portada (`udN/index.md`).
+- `docs/css/apuntes.css`: estilo del recuadro «Desde C++» y de las figuras.
+- `herramientas/web/`: `requirements.txt` (versiones fijadas de MkDocs y Material) y `hooks.py`, que convierte al construir los recuadros `> **Desde C++.**` y las alertas de GitHub (`> [!TIP]`…) en avisos de Material.
+- `.github/workflows/publicar-sitio.yml`: construye la web con `mkdocs build --strict` y la publica en cada *push* a `main`.
 - `herramientas/figuras/`: los generadores Python de las figuras SVG (ver su README).
-- Navegación de la web (añadida al tema sin tocarlo): `docs/_includes/head_custom.html` carga `docs/assets/css/indice-lateral.css` y `docs/assets/js/indice-lateral.js`. En las páginas con índice `{:toc}`, el script crea el índice «En esta unidad» (h2 y h3, con el apartado actual resaltado), que se ve fijo a la derecha desde 1200 px y como panel con el botón «Índice» en pantallas más estrechas; en todas las páginas del menú añade al final los enlaces a la unidad anterior y a la siguiente, tomados del menú lateral, así que basta con que cada unidad tenga su `nav_order`. `search_placeholder_custom.html` y `nav_footer_custom.html` traducen el buscador y el pie del menú. Los `_includes/*.html` sí llevan Liquid: la regla de las llaves es para los Markdown.
 
 ## Decisiones del módulo (no cambiarlas sin consultarlo)
 
@@ -23,14 +25,31 @@ Este repositorio contiene los apuntes del módulo Acceso a Datos que imparte Jai
 
 ## Formato de cada unidad
 
-Título y «*Acceso a Datos · 2.º DAM · Versión del dd/mm/aaaa*» (actualiza la fecha al cambiar una unidad). Después: presentación con horas; tabla de criterios de evaluación → apartados; temporalización por sesiones con fecha; requisitos previos; convenciones; apartados N.x; «Práctica de la unidad · Hito N del proyecto integrador» con entregables, defensa oral de 5 minutos y tabla criterio → evidencia; resumen en tabla; bibliografía con «Todas las fuentes web se consultaron el …» y nota de actualización.
+Sin *front matter*: título `# Unidad Didáctica N · …` y «*Acceso a Datos · 2.º DAM · Versión del dd/mm/aaaa*» (actualiza la fecha al cambiar una unidad). No hace falta índice: Material genera la tabla de contenidos con los h2 y h3. Después: presentación con horas; tabla de criterios de evaluación → apartados; temporalización por sesiones con fecha; requisitos previos; convenciones; apartados N.x; «Práctica de la unidad · Hito N del proyecto integrador» con entregables, defensa oral de 5 minutos y tabla criterio → evidencia; resumen en tabla; bibliografía con «Todas las fuentes web se consultaron el …» y nota de actualización.
 
 - Listados numerados: `**Listado N.x.** Descripción` antes del bloque de código.
 - Figuras: `![texto alternativo descriptivo](img/fig-N-x-nombre.svg)` y debajo `*Figura N.x. Pie.*`. Numeración por orden de aparición; si se insertan figuras o listados, renumera y corrige las referencias.
 - Recuadros: `> **Desde C++.** …`. Ejercicios en `### Para practicar`, con (A) para los autónomos.
-- Sin `<` ni `>` sueltos fuera del código en el texto o en los textos alternativos (kramdown los toma por HTML).
-- Sin dobles llaves de apertura ni una llave seguida de un signo de porcentaje en ningún Markdown, tampoco dentro de bloques de código: Jekyll las interpreta como Liquid y la publicación falla. Si un ejemplo las necesita, envuélvelo en un bloque `raw` de Liquid. Esta regla vale también para este fichero y para el README.
+- Órdenes que cambian según el sistema: en un mismo listado, con pestañas de Material y siempre con estas dos etiquetas exactas, para que la pestaña elegida se recuerde en toda la web (Listados 2.2 y 2.7):
+
+  ````text
+  === "Windows (PowerShell)"
+
+      ```powershell
+      ...
+      ```
+
+  === "macOS y Linux (bash/zsh)"
+
+      ```bash
+      ...
+      ```
+  ````
+
+- Python-Markdown exige **4 espacios** para lo que va dentro de una lista o de una pestaña (párrafos, bloques de código, sublistas); con 2 o 3 espacios el contenido se sale de la lista.
+- Sin `<` ni `>` sueltos fuera del código en el texto o en los textos alternativos (se toman por HTML).
 - Tablas sin `|` dentro de las celdas.
+- Los enlaces entre páginas apuntan al fichero `.md` (`../ud1/index.md#12-…`); los enlaces y anclas rotos detienen la publicación, porque se construye con `--strict`.
 
 ## Figuras
 
@@ -42,7 +61,11 @@ Todo el código de los apuntes debe compilar y ejecutarse con JDK 25, y las sali
 
 ## Publicación
 
-GitHub Pages publica desde la rama `main` y la carpeta **`/docs`** (Settings → Pages). Si se elige la raíz, Jekyll procesa también este fichero y el README, y la web no es la de los apuntes. Cada *push* lanza la tarea «pages build and deployment» en la pestaña Actions: si falla, el error aparece en el paso *build*.
+En GitHub, Settings → Pages → Source debe estar en **GitHub Actions**. Cada *push* a `main` que toque `docs/`, `mkdocs.yml`, `herramientas/web/` o el flujo lanza «Publicar el sitio en GitHub Pages» en la pestaña Actions; también se puede lanzar a mano (*Run workflow*). Si falla, el error está en el paso «Construir el sitio».
+
+Vista previa local (desde la raíz del repositorio): `pip install -r herramientas/web/requirements.txt` y `mkdocs serve`, que abre la web en http://127.0.0.1:8000/ad-dam/ y la recarga al guardar. Antes de entregar, `mkdocs build --strict` no debe dar ningún aviso.
+
+MkDocs está fijado en la 1.6.1: no hay que pasar a MkDocs 2, que rompe Material y los *hooks*.
 
 ## Entrega de cada unidad
 

@@ -1,20 +1,6 @@
----
-title: "UD1 · Ficheros"
-nav_order: 3
----
-
 # Unidad Didáctica 1 · Ficheros
-{: .no_toc }
 
 *Acceso a Datos · 2.º DAM · Versión del 01/10/2026*
-
-<details open markdown="block">
-  <summary>Contenido de la unidad</summary>
-  {: .text-delta }
-1. TOC
-{:toc}
-</details>
-
 
 ## Presentación de la unidad
 

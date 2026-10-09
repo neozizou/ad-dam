@@ -1,0 +1,92 @@
+# Web de los apuntes: MkDocs con el tema Material (mismo montaje que python-ia-dam).
+# Se publica con GitHub Actions (.github/workflows/publicar-sitio.yml).
+# Vista previa local: pip install -r herramientas/web/requirements.txt  y  mkdocs serve
+
+site_name: Acceso a Datos · 2.º DAM
+site_description: Apuntes del módulo Acceso a Datos del CFGS Desarrollo de Aplicaciones Multiplataforma · Curso 2026-2027
+site_url: https://neozizou.github.io/ad-dam/
+repo_url: https://github.com/neozizou/ad-dam
+repo_name: neozizou/ad-dam
+edit_uri: ""
+copyright: Acceso a Datos · 2.º DAM · Curso 2026-2027
+docs_dir: docs
+site_dir: site
+use_directory_urls: true
+
+# El código de los ejemplos se consulta y se descarga desde GitHub, no desde la web
+exclude_docs: |
+  ud*/ejemplos/
+
+theme:
+  name: material
+  language: es
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Cambiar a modo oscuro
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Cambiar a modo claro
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.top
+    - navigation.indexes
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.tabs.link
+
+extra_css:
+  - css/apuntes.css
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - footnotes
+  - toc:
+      permalink: true
+      toc_depth: 3
+      slugify: !!python/object/apply:pymdownx.slugs.slugify {kwds: {case: lower}}
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+
+plugins:
+  - search:
+      lang: es
+
+hooks:
+  - herramientas/web/hooks.py
+
+# Con mkdocs build --strict, cualquier enlace o ancla rota detiene la publicación
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
+  anchors: warn
+
+nav:
+  - Inicio: index.md
+  - UD0 · Java para quien ya programa en C++: ud0/index.md
+  - UD1 · Ficheros: ud1/index.md
+  - UD2 · Bases de datos relacionales con JDBC: ud2/index.md

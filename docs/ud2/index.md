@@ -1,20 +1,6 @@
----
-title: "UD2 · Bases de datos relacionales con JDBC"
-nav_order: 4
----
-
 # Unidad Didáctica 2 · Bases de datos relacionales con JDBC
-{: .no_toc }
 
 *Acceso a Datos · 2.º DAM · Versión del 08/10/2026*
-
-<details open markdown="block">
-  <summary>Contenido de la unidad</summary>
-  {: .text-delta }
-1. TOC
-{:toc}
-</details>
-
 
 ## Presentación de la unidad
 
@@ -194,21 +180,25 @@ En clase usarás el servidor MariaDB del módulo: el profesor te dará el nombre
 
 **Listado 2.2.** Instalación de MariaDB
 
-```powershell
-# Windows (PowerShell). El instalador pide la contraseña de root: apúntala.
-winget install MariaDB.Server
-# Si prefieres el asistente gráfico, descarga el .msi de https://mariadb.org/download/
-```
+=== "Windows (PowerShell)"
 
-```bash
-# macOS (Homebrew)
-brew install mariadb
-brew services start mariadb       # arranca ahora y en cada inicio de sesión
+    ```powershell
+    # El instalador pide la contraseña de root: apúntala.
+    winget install MariaDB.Server
+    # Si prefieres el asistente gráfico, descarga el .msi de https://mariadb.org/download/
+    ```
 
-# Ubuntu o Debian
-sudo apt install mariadb-server
-sudo systemctl status mariadb     # comprueba que está en marcha
-```
+=== "macOS y Linux (bash/zsh)"
+
+    ```bash
+    # macOS (Homebrew)
+    brew install mariadb
+    brew services start mariadb       # arranca ahora y en cada inicio de sesión
+
+    # Ubuntu o Debian
+    sudo apt install mariadb-server
+    sudo systemctl status mariadb     # comprueba que está en marcha
+    ```
 
 Si usas Docker, también puedes arrancarlo en un contenedor: `docker run --name mariadb -e MARIADB_ROOT_PASSWORD=una-clave -p 3306:3306 -d mariadb:lts`.
 
@@ -372,17 +362,19 @@ db.clave=
 
 **Listado 2.7.** Definir la variable de entorno para la sesión actual de la terminal
 
-```powershell
-# Windows (PowerShell)
-$env:TIENDA_DB_CLAVE = "cambia-esta-clave"
-.\gradlew run -q --console=plain
-```
+=== "Windows (PowerShell)"
 
-```bash
-# macOS y Linux
-export TIENDA_DB_CLAVE=cambia-esta-clave
-./gradlew run -q --console=plain
-```
+    ```powershell
+    $env:TIENDA_DB_CLAVE = "cambia-esta-clave"
+    .\gradlew run -q --console=plain
+    ```
+
+=== "macOS y Linux (bash/zsh)"
+
+    ```bash
+    export TIENDA_DB_CLAVE=cambia-esta-clave
+    ./gradlew run -q --console=plain
+    ```
 
 La variable dura lo que dura la terminal. El botón **Run** de VS Code no la ve si la defines después de abrir VS Code; en ese caso, usa `db.clave` en tu `config.properties` local, que nunca se sube.
 

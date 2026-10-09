@@ -19,10 +19,9 @@ out/
 docs/**/ejemplos/**/datos/
 docs/**/ejemplos/**/export/
 
-# Jekyll (si se previsualiza la web en local)
-_site/
-.jekyll-cache/
-.sass-cache/
+# Web generada por MkDocs (mkdocs build o mkdocs serve)
+site/
+.cache/
 
 # Herramientas de figuras
 __pycache__/
